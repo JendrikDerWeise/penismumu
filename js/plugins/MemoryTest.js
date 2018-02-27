@@ -4,68 +4,103 @@ class MemoryTest{
     constructor(hackingWindow, numOfCards){
         this._memoryCardsFront = [];
         this._memoryCardsBack = [];
+        this._availableCards = [];
         this._hackingWindow = hackingWindow;
         this._clickCount = 0;
+        this._numAlt = -1;
+        this._won = false;
+        this._found = 0;
+
+        for(var i = 1; i < 9; i++){
+            var png = ImageManager.loadPicture('0'+i);
+            this._availableCards.push(png);
+        }
+    
+        this.shuffle(this._availableCards);
     }
 
    fillArray(numOfCards){
         for(var i = 0; i < numOfCards; i++){
-           /* var buttonFront = this.insertPic(i+1);
+            var buttonFront = this.insertPic('0' + (i+1), i);
             this._memoryCardsFront.push(buttonFront);
             this._hackingWindow.addChild(buttonFront)
-            this._memoryCardsFront[i].visible = false;*/
+            this._memoryCardsFront[i].visible = false;
 
-            var buttonBack = this.insertPic((i+1)+'_blanc');
+            var buttonBack = this.insertPic('0' + (i+1) + '_blanc', i);
             this._memoryCardsBack.push(buttonBack);
             this._hackingWindow.addChild(buttonBack);
             this._memoryCardsBack[i].setClickHandler(this.onMouseClick.bind(this,i));
-            
         }
+        this.shuffle(this._memoryCardsFront);
    }
 
-   insertPic(i){
-       console.log('0'+i);
-        var bitmap = ImageManager.loadPicture('0'+i);
+   insertPic(bmpName, i){
+        if(bmpName.length > 2)
+            var bitmap = ImageManager.loadPicture(bmpName);
+        else
+            var bitmap = this._availableCards[i%3];
         
         var buttonWidth = 200;
         var buttonHeight = 200;
-        var x = ((i-1) * buttonWidth) + 20;
-        var w = buttonWidth * (i === 4 ? 2 : 1);
+        var x;
+        var y;
+        if(i >= 3){
+            x = ((i%3)* buttonWidth) + ((i%3) * 25) + 25;
+            y = 225;
+        }else{
+            x = (i * buttonWidth) + (i * 25) + 25;
+            y = 0;
+        }
 
         var button = new Sprite_Button();
         button.bitmap = bitmap; 
-        //button.setFrame(x*(-1),0,200,200);
-        //button.setColdFrame(x*(-1), 0, w+200, buttonHeight);
-        //button.setHotFrame(x*(-1), buttonHeight, w+200, buttonHeight);
         button.x = x;
-        button.y = 0;
+        button.y = y;
 
-        //this._hackingWindow.addChildToBack(this._memoryCardsFront[i]);//it very important. it same add child, but your sprite display under window simply
-       
-       //this._memoryCardsFront[i].setColdFrame(x, 0, w, buttonHeight);
-       //this._memoryCardsFront[i].setHotFrame(x, buttonHeight, w, buttonHeight);
-       /*
-        this._memoryCardsBack[i] = new Sprite_Button();
-        this._memoryCardsBack[i].bitmap = bitmapBack;
-        this._hackingWindow.addChildToBack(this._memoryCardsBack[i]);//it very important. it same add child, but your sprite display under window simply
-        this._memoryCardsBack[i].setFrame(i*buttonWidth,0,200,200);
-        //this._memoryCardsBack[i].setColdFrame((i)*(-200),0,buttonWidth,buttonHeight);
-       //this._memoryCardsBack[i].setHotFrame((i)*(-200),0,buttonWidth,buttonHeight);
-*/
         return button;
    }
 
    onMouseClick(num){
-        //this._clickCount++;
-        this._memoryCardsFront[num].visible = true;
+        this._clickCount++;
+        
         console.log("geklickt "+num);
 
-        /*if(this._clickCount == 3){
-            for(var i = 1; i<=3; i++){
+        if(this._clickCount == 2){
+            for(var i = 0; i<6; i++){
                 this._memoryCardsFront[i].visible = false;
             }
             this._clickCount = 0;
-        }*/
+        }
+        this._memoryCardsFront[num].visible = true;
+
+        if(this._numAlt%3 == num%3){
+            this._found++;
+            this._memoryCardsFront[this._numAlt].setFound(true);
+            this._memoryCardsFront[num].setFound(true);
+            console.log("gleiche gefunden!");
+        }
+
+        if(this._found == 3)
+            this._won = true;
+
+        this._numAlt = num;
+ 
+        for(var i = 0; i < 6; i++){
+            if(this._memoryCardsFront[i].getFound()){
+                console.log("paarchen!");
+                this._memoryCardsFront[i].visible = true;
+            }
+        }
    }
+
+   shuffle(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+    }
 
 }

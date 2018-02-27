@@ -85,6 +85,7 @@ Sprite_Button.prototype.initialize = function() {
     this._coldFrame = null;
     this._hotFrame = null;
     this._clickHandler = null;
+    this._found = false;
 };
 
 Sprite_Button.prototype.update = function() {
@@ -104,6 +105,14 @@ Sprite_Button.prototype.updateFrame = function() {
         this.setFrame(frame.x, frame.y, frame.width, frame.height);
     }
 };
+
+Sprite_Button.prototype.setFound = function(boo){
+    this._found = boo;
+;}
+
+Sprite_Button.prototype.getFound = function(){
+    return this._found;
+;}
 
 Sprite_Button.prototype.setColdFrame = function(x, y, width, height) {
     this._coldFrame = new Rectangle(x, y, width, height);
