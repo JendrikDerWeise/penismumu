@@ -14,6 +14,7 @@ Scene_Hacking.prototype.create = function () {
     this._hackingWindow = new Window_Hacking(0, 0);
     this._hackingWindow.show();
     this.addWindow(this._hackingWindow);
+    
 };
 
 Scene_Hacking.prototype.update = function () {

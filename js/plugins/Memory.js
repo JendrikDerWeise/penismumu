@@ -12,24 +12,20 @@ Memory.prototype.initialize = function (hackingWindow, numOfCards){
     this.fillArray(numOfCards);
 };
 
-Memory.prototype.refresh = function () {
-    //this.insertPic();
-};
-
 Memory.prototype.fillArray = function(numOfCards){
     for(var i = 1; i<=numOfCards; i++){
-        _memoryCardsFront[i] = this.insertPic(i);
-        _memoryCardsBack[i] = this.insertPic(0);
-        _memoryCardsFront[i].addEventListener('mousedown', this.onMouseClick(_memoryCardsFront[i]));       
+        this._memoryCardsFront[i] = this.insertPic(i);
+        this._memoryCardsBack[i] = this.insertPic(0);
+        document.this._memoryCardsFront[i].addEventListener('mousedown', this.onMouseClick(this._memoryCardsFront[i]));
     }
 };
 
 Memory.prototype.insertPic = function(number){
     
     var bitmap = new Sprite(ImageManager.loadPicture("0"+number));
-    this.addChildToBack(bitmap);//it very important. it same add child, but your sprite display under window simply
+    this._hackingWindow.addChildToBack(bitmap);//it very important. it same add child, but your sprite display under window simply
     bitmap.setFrame(0,0,this.width,this.height);
-    bitmap.visible = false;
+    
 
     return bitmap;    
 };

@@ -8,5 +8,6 @@ var $plugins =
 {"name":"TerraxLightingQuasiABS","status":true,"description":"v1.2 Support for linking QuasiABS with TerraxLightingSystem","parameters":{}},
 {"name":"HackWindow","status":true,"description":"","parameters":{}},
 {"name":"HackingScene","status":true,"description":"","parameters":{}},
-{"name":"Memory","status":true,"description":"","parameters":{}}
+{"name":"Memory","status":true,"description":"","parameters":{}},
+{"name":"MemoryTest","status":true,"description":"","parameters":{}}
 ];
