@@ -7,5 +7,6 @@ var $plugins =
 {"name":"TerraxLighting","status":true,"description":"v1.5.1 Creates an extra layer that darkens a map and adds lightsources!","parameters":{"Player radius":"5","Add to options":"Yes","Option menu entry":"Lighting effects","Reset Lights":"No","Save DaynightHours":"0","Save DaynightMinutes":"0","Save DaynightSeconds":"0","Flashlight offset":"0","Screensize X":"866","Screensize Y":"630","Kill Switch":"No"}},
 {"name":"TerraxLightingQuasiABS","status":true,"description":"v1.2 Support for linking QuasiABS with TerraxLightingSystem","parameters":{}},
 {"name":"HackWindow","status":true,"description":"","parameters":{}},
-{"name":"HackingScene","status":true,"description":"","parameters":{}}
+{"name":"HackingScene","status":true,"description":"","parameters":{}},
+{"name":"Memory","status":true,"description":"","parameters":{}}
 ];

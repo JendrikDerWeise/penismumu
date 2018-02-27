@@ -9,7 +9,9 @@ Window_Hacking.prototype.initialize = function (x, y) {
     var width = this.windowWidth();
     var height = this.windowHeight();
     Window_Base.prototype.initialize.call(this, x, y, width, height);
+    this._memory = new Memory(this, 3);
     this.refresh();
+    
 };
 
 Window_Hacking.prototype.windowWidth = function () {
@@ -24,7 +26,8 @@ Window_Hacking.prototype.refresh = function () {
     var x = this.textPadding();
     var width = this.contents.width - this.textPadding() * 2;
     this.contents.clear();
-    this.drawText(this.text(), x,0, width, false)
+    this.drawText(this.text(), x,0, width, false);
+   
 };
 
 Window_Hacking.prototype.text = function () {
@@ -36,3 +39,5 @@ Window_Hacking.prototype.open = function () {
     this.refresh();
     Window_Base.prototype.open.call(this);
 };
+
+
